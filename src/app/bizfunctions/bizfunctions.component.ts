@@ -11,7 +11,6 @@ import { SelectItem } from 'primeng/primeng';
 })
 
 export class BizfunctionComponent implements OnInit {
-  title = 'Business Function';
   bizfunctions: SelectItem[];
   bizfunction: Category;
 
