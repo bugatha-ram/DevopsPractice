@@ -1,0 +1,74 @@
+<div class="table">
+    <h4>Test Plans:</h4>
+    <ul id="horizontal-list">
+        <li>
+            <div>
+                <input type="checkbox" (change)="toggleSelectAllTestplans(selectAllTestplans);" [(ngModel)]="selectAllTestplans" />
+                <label class="h">Select All</label>
+            </div>
+        </li>
+        <li *ngFor="let testplan of testplan_cols">
+            <div>
+                <input type="checkbox" [value]="testplan.name" [(ngModel)]="testplan.selected" />
+                <label class="h">{{testplan.label}}</label>
+            </div>
+        </li>
+    </ul>
+    <h4>Test Cases:</h4>
+    <ul id="horizontal-list">
+        <li>
+            <div>
+                <input type="checkbox" (change)="toggleSelectAllTestcases(selectAllTestcases);" [(ngModel)]="selectAllTestcases" />
+                <label class="h">Select All</label>
+            </div>
+        </li>
+        <li *ngFor="let testcase of testcase_cols">
+            <div>
+                <input type="checkbox" [value]="testcase.name" [(ngModel)]="testcase.selected" />
+                <label class="h">{{testcase.label}}</label>
+            </div>
+        </li>
+    </ul>
+    <h4>Test Scripts:</h4>
+    <ul id="horizontal-list">
+        <li>
+            <div>
+                <input type="checkbox" (change)="toggleSelectAllTestscripts(selectAllTestscripts);" [(ngModel)]="selectAllTestscripts" />
+                <label class="h">Select All</label>
+            </div>
+        </li>
+        <li *ngFor="let testscript of testscript_cols">
+            <div>
+                <input type="checkbox" [value]="testscript.name" [(ngModel)]="testscript.selected" />
+                <label class="h">{{testscript.label}}</label>
+            </div>
+        </li>
+        <li *ngFor="let step of testscript_step_cols">
+            <div>
+                <input type="checkbox" [value]="step.name" [(ngModel)]="step.selected" (change)="disableStep(step.selected);" [disabled]="executionCheck" />
+                <label class="h">{{step.label}}</label>
+            </div>
+        </li>
+    </ul>
+    <h4>Test Execution Results:</h4>
+    <ul id="horizontal-list">
+        <li>
+            <div>
+                <input type="checkbox" (change)="toggleSelectAllExecutionresults(selectAllExecutionresults);" [(ngModel)]="selectAllExecutionresults" [disabled]="stepCheck" (change)="disableExeStep(selectAllExecutionresults);" />
+                <label class="h">Select All</label>
+            </div>
+        </li>
+        <li *ngFor="let executionresult of executionresult_cols">
+            <div>
+                <input type="checkbox" [value]="executionresult.name" [(ngModel)]="executionresult.selected" [disabled]="stepCheck" (change)="disableExe(executionresult.selected);" />
+                <label class="h">{{executionresult.label}}</label>
+            </div>
+        </li>
+        <li *ngFor="let executionstep of executionresult_step_cols">
+            <div>
+                <input type="checkbox" [value]="executionstep.name" [(ngModel)]="executionstep.selected" [disabled]="stepCheck" (change)="disableExeStep(executionstep.selected);" />
+                <label class="h">{{executionstep.label}}</label>
+            </div>
+        </li>
+    </ul>
+</div>

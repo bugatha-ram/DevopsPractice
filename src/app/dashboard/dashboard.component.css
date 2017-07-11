@@ -1,0 +1,11 @@
+table {
+    width: 100%;
+    display: block;
+    max-height: 600px;
+    overflow-x: auto;
+    padding: 0;
+}
+
+table tbody {
+    overflow-y: scroll;
+}

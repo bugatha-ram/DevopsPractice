@@ -1,0 +1,76 @@
+<header class="usa-header site-header" role="banner">
+    <div class="usa-navbar site-header-navbar" style="height:5rem;padding:10px 20px;">
+        <span *ngIf="loggedIn">Hello User! <a [routerLink]="['/login']">(Logout)</a></span>
+        <span *ngIf="!loggedIn">Hello Guest! <a [routerLink]="['/login']">(Logout)</a></span>
+    </div>
+</header>
+<form *ngIf="!isResetting" id="adhocReport">
+    <div class="usa-grid">
+        <div class="usa-width-one-whole">
+            <h2 style="margin-top:1.5em;">Adhoc Reports</h2>
+        </div>
+    </div>
+    <div class="usa-grid">
+        <div class="usa-width-one-half">
+            <testplans></testplans>
+            <testcases></testcases>
+            <bizfunctions></bizfunctions>
+            <bizsubfunctions></bizsubfunctions>
+            <capability-team></capability-team>            
+        </div>
+        <div class="usa-width-one-half">
+            <releases></releases>
+            <testcase-owners></testcase-owners>
+            <testscript-owners></testscript-owners>
+            <test-types></test-types>
+            <executionresults></executionresults>
+        </div>
+    </div>
+    <div class="usa-grid">
+        <div class="usa-width-one-whole">
+            <h2 style="margin-top:1.5em;">Columns to Display:</h2>
+        </div>
+    </div>
+    <div class="usa-grid">
+        <div class="usa-width-one-whole">
+            <cols-display></cols-display>
+        </div>
+    </div>
+    <div class="usa-grid" style="margin-bottom:1.5em">
+        <div class="usa-width-one-whole" style="text-align:right">
+            <button (click)="getReport()">Generate Report</button>
+            <button class="usa-button-gray" type="button" (click)="reset()">Reset</button>
+            <button class="usa-button-primary-alt" (click)="tableToExcel('datatable','Adhoc Report')" ><i class="fa fa-file-excel-o" aria-hidden="true">&nbsp;</i>Export</button>
+        </div>
+    </div>
+    <div class="usa-grid" *ngIf="test_plans.length > 0;" style="margin-bottom: 4em;">
+        <div class="usa-width-one-whole">
+            <table id="datatable">
+                <thead>
+                    <tr>
+                        <th style="white-space: nowrap;" *ngFor="let col of cols">{{col.label}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of rows">
+                        <td *ngFor="let testplan_col of testplan_cols" innerHTML="{{readData(row.test_plan,testplan_col.datakey)}}"></td>
+                        <td *ngFor="let testcase_col of testcase_cols" innerHTML="{{readData(row.test_case,testcase_col.datakey)}}"></td>
+                        <td *ngFor="let testscript_col of testscript_cols" innerHTML="{{readData(row.test_script,testscript_col.datakey)}}"></td>
+                        <td *ngFor="let testscript_step_col of testscript_step_cols" innerHTML="{{readData(row.test_script_step,testscript_step_col.datakey)}}"></td>
+                        <td *ngFor="let executionresult_col of executionresult_cols" innerHTML="{{readData(row.execution_result,executionresult_col.datakey)}}"></td>
+                        <td *ngFor="let executionresult_step_col of executionresult_step_cols" innerHTML="{{readData(row.execution_step_result,executionresult_step_col.datakey)}}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="usa-grid" *ngIf="NoData" style="margin-bottom: 4em;">
+        <div class="usa-width-one-whole">
+            <div class="usa-alert usa-alert-info">
+                <div class="usa-alert-body">
+                    <div class="usa-alert-heading"><strong>No data available</strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
